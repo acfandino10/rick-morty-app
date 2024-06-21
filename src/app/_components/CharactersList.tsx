@@ -29,7 +29,7 @@ export default function CharactersList({ title }: CharactersListProps) {
   return (
     <List
       sx={{
-        width: "375px",
+        width: { md: "375px", sm: "100%" },
         paddingTop: "42px",
         fontFamily: "GreyCliff",
         paddingRight: "13px",
