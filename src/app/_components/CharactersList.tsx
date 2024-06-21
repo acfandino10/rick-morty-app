@@ -1,77 +1,75 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
+import { Suspense, Fragment, useState, useEffect } from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import { Character } from "types/character";
+import { FavoriteBorderOutlined } from "@mui/icons-material";
+import { useQuery } from "@apollo/client";
+import { GET_CHARACTERS } from "../_graphql/queries/GetCharacters";
 
 interface CharactersListProps {
   title: string;
-  size: number;
 }
 
-const characterData = [
-  {
-    id: 1,
-    name: 'Brunch this weekend?',
-    avatar: '/static/images/avatar/1.jpg',
-    author: 'Ali Connors',
-    message: "I'll be in your neighborhood doing errands this…",
-  },
-  {
-    id: 2,
-    name: 'Summer BBQ',
-    avatar: '/static/images/avatar/2.jpg',
-    author: 'to Scott, Alex, Jennifer',
-    message: "Wish I could come, but I'm out of town this…",
-  },
-  {
-    id: 3,
-    name: 'Oui Oui',
-    avatar: '/static/images/avatar/3.jpg',
-    author: 'Sandra Adams',
-    message: 'Do you have Paris recommendations? Have you ever…',
-  },
-];
+export default function CharactersList({ title }: CharactersListProps) {
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const { loading, error, data } = useQuery(GET_CHARACTERS);
 
-export default function CharactersList({ title, size }: CharactersListProps) {
+  useEffect(() => {
+    document.title = "Rick and Morty";
+    if (data) {
+      setCharacters(data.characters.results);
+    }
+  }, [data]);
   return (
-    <List sx={{ maxWidth: 360, height: '100%', bgcolor: 'background.paper' }}>
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        CHARACTERS ({size})
-      </Typography>
-      {characterData.map((character) => (
-        <React.Fragment key={character.id}>
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt={character.name} src={character.avatar} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={character.name}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {character.author}
+    
+      <List
+        sx={{
+          width: "375px",
+          paddingTop: "42px",
+          paddingRight: "13px",
+          paddingLeft: "19px",
+          maxWidth: "sm",
+          maxHeight: "100vh",
+          bgcolor: "background.paper",
+          overflow: "auto",
+        }}
+      >
+        <Typography variant="h6" gutterBottom pb={"25px"} sx={{ color:"#1F2937", fontSize: "24px", fontWeight: 400}}>
+          {title}
+        </Typography>
+        <Typography variant="body1" pb={"25px"} sx={{ color: "#6B7280", fontSize: "12px", fontWeight: 600 }} gutterBottom>
+          CHARACTERS ({characters.length})
+        </Typography>
+        <Suspense fallback={<div>Loading character details...</div>}>
+        {characters?.map((character) => (
+          <Fragment key={character.id}>
+          <Divider component="li" sx={{marginLeft: 2, marginRight: 2}} />
+            <ListItem alignItems="center">
+              <ListItemAvatar>
+                <Avatar alt={character.name} src={character.image} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  <Typography variant="body1" sx={{ color: "#1F2937", fontSize: "16px", fontWeight: 600 }}>
+                    {character.name}
                   </Typography>
-                  {` — ${character.message}`}
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </React.Fragment>
-      ))}
-    </List>
+                }
+                secondary={
+                <Typography variant="body2" sx={{ color: "#6B7280", fontSize: "16px", fontWeight: 400 }}>
+                  {character.species}
+                </Typography>
+                }
+              />
+              <FavoriteBorderOutlined htmlColor={'#D1D5DB'}/>
+            </ListItem>
+          </Fragment>
+        ))}
+        </Suspense>
+      </List>
   );
 }

@@ -18,7 +18,13 @@
       }
     ],
     "paths": {
-      "app/*": ["./src/*"]
+      "app/*": ["./src/*"],
+      "components/*": ["./src/app/_components/*"],
+      "fonts/*": ["./src/app/_fonts/*"],
+      "graphql/*": ["./src/app/_graphql/*"],
+      "lib/*": ["./src/app/_lib/*"],
+      "services/*": ["./src/app/_services/*"],
+      "types/*": ["./src/app/_types/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

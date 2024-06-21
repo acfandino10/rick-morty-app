@@ -1,10 +1,21 @@
 "use client";
-import CharactersList from "../_components/CharactersList";
-// className="flex min-h-screen flex-col items-center justify-between p-24"
-export default function Home() {
+
+import { useEffect } from "react";
+import CharactersList from "components/CharactersList";
+import { withApollo } from "lib/withApollo";
+
+function Home() {
+
+
+  useEffect(() => {
+    document.title = "Rick and Morty";
+  }, []);
+
   return (
     <main className="flex max-h-screen flex-col justify-flex-start h-lvh">
-      <CharactersList title="Rick and Morty list" size={4} />
+      <CharactersList title="Rick and Morty list" />
     </main>
   );
 }
+
+export default withApollo(Home);
