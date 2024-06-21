@@ -18,6 +18,8 @@
 
 body {
   color: #111827;
+  font-family: 'GreyCliff', source-code-pro, Roboto, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -28,8 +30,12 @@ body {
 
 @font-face {
   font-family: "GreyCliff";   /*Can be any text*/
-  src: local("GreyCliffCf-Regular"),
-    /* url("./fonts/GreyCliff.otf") format("opentype"); */
+  src: local("FONTSPRING DEMO - Greycliff CF"),
+    url("../_fonts/GreyCliff.otf") format("opentype");
+}
+code {
+  font-family: 'GreyCliff', source-code-pro, Roboto, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 @layer utilities {
