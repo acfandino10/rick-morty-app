@@ -6,20 +6,46 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?|jsx?)$"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.5",
+    "@apollo/experimental-nextjs-app-support": "^0.11.2",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@next/font": "^14.2.4",
+    "@testing-library/react": "^16.0.0",
+    "graphql": "^16.8.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.1.0",
+    "@testing-library/jest-dom": "^6.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -8,22 +8,34 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 255, 255, 255;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: #111827;
+  font-family: 'GreyCliff', source-code-pro, Roboto, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+@font-face {
+  font-family: "GreyCliff";   /*Can be any text*/
+  src: local("FONTSPRING DEMO - Greycliff CF"),
+    url("../_fonts/GreyCliff.otf") format("opentype");
+}
+code {
+  font-family: 'GreyCliff', source-code-pro, Roboto, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 @layer utilities {
