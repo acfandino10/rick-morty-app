@@ -3,8 +3,8 @@ export type Character = {
     name: string;
     species: string;
     status?: string;
+    location?: string;
     gender?: string;
     image: string;
     origin?: string;
-    location?: string;
 };

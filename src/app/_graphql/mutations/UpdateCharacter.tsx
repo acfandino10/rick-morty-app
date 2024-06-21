@@ -6,6 +6,7 @@ export const UPDATE_CHARACTER = gql`
             id
             name
             status
+            gender
             species
         }
     }
